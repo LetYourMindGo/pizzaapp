@@ -1,34 +1,30 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
+import { IRestaurant } from '../../types/types';
 
-const Restaurants = () => {
+interface Props {
+  latitude: number|undefined,
+  longitude: number|undefined
+}
+
+const Restaurants: React.FC<Props>= ({latitude, longitude}) => {
+  const [restaurants, setRestaurants] = useState<IRestaurant[]>([]);
   
   const getRestaurants = async() => {
     const restaurantList = await axios.get('https://private-anon-44d7ca3ab4-pizzaapp.apiary-mock.com/restaurants/')
-    console.log(restaurantList.data);
+    setRestaurants(restaurantList.data)
   }
 
-  const getLocation = () => {
-    const success = (position: GeolocationPosition) => {
-      const latitude  = position.coords.latitude;
-      const longitude = position.coords.longitude;
-
-      console.log('lat', latitude);
-      console.log('long', longitude);
-    }
-
-    const error = () => {
-      console.log('something went wrong');
-    }
-
-    navigator.geolocation.getCurrentPosition(success, error);
-  }
+  useEffect(() => {
+    getRestaurants();
+  }, [])
 
   return (
-    <>
-      <button onClick={getRestaurants}>Restaurants</button>
-      <button onClick={getLocation}>Location</button>
-    </>
+    <div>
+      {restaurants.map(restaurant => (
+        restaurant.name
+      ))}
+    </div>
   )
 };
 

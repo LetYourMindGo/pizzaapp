@@ -4,7 +4,8 @@ export interface IRestaurant{
   address1: string,
   address2: string,
   latitude: number,
-  longitude: number
+  longitude: number,
+  distance: number
 }
 
 export interface IMenu{

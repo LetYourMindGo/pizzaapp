@@ -3,13 +3,13 @@ import Restaurants from './components/Rastaurants/Restaurants'
 import './App.css';
 
 const App: React.FC = () => {
-  const [latitude, setLatitude] = useState<number>();
-  const [longitude, setLongitude] = useState<number>();
+  const [myLatitude, setMyLatitude] = useState<number>(0);
+  const [myLongitude, setMyLongitude] = useState<number>(0);
 
-  const getLocation = () => {
+  const watchLocation = () => {
     const success = (position: GeolocationPosition) => {
-      setLatitude(position.coords.latitude);
-      setLongitude(position.coords.longitude);
+      setMyLatitude(position.coords.latitude);
+      setMyLongitude(position.coords.longitude);
     }
 
     const error = () => {
@@ -20,12 +20,13 @@ const App: React.FC = () => {
   }
 
   useEffect(() => {
-    getLocation();
+    watchLocation();
   }, [])
 
   return (
     <div className="App">
-      <Restaurants latitude={latitude} longitude={longitude} />
+      <Restaurants myLatitude={myLatitude} myLongitude={myLongitude} />
+      <p>Your position: Lat:{myLatitude}, Long:{myLongitude}</p>
     </div>
   );
 }

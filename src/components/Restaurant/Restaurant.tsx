@@ -1,17 +1,24 @@
-import React from 'react'
-import { IRestaurant } from '../../types/types'
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import { IRestaurant } from '../../types/types';
 
 interface Props {
-  restaurant: IRestaurant
+  myLatitude: number;
+  myLongitude: number;
+  restaurants: IRestaurant[];
 }
 
-const Restaurant: React.FC<Props> = ({restaurant}) => {
+const Restaurant:React.FC<Props> = ({myLatitude, myLongitude, restaurants}) => {
+  
+  const idFromParams: string | undefined = useParams().id?.substring(1)
+  let id!: number;
+  if(typeof idFromParams !== 'undefined') {
+    id = parseInt(idFromParams, 10)
+  }
 
   return (
     <div>
-      <p>{restaurant.name}</p>
-      <p>{restaurant.address1}</p>
-      <p>{Math.round((restaurant.distance + Number.EPSILON) * 100) / 100}km</p>
+      {restaurants.find(x => x.id === id)?.name}
     </div>
   )
 }

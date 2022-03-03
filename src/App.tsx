@@ -1,10 +1,14 @@
-import React,{useEffect, useState} from 'react';
-import Restaurants from './components/Rastaurants/Restaurants'
+import React, {useEffect, useState} from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Home from './components/Home/Home'
+import Restaurant from './components/Restaurant/Restaurant';
 import './App.css';
+import { IRestaurant } from './types/types';
 
 const App: React.FC = () => {
   const [myLatitude, setMyLatitude] = useState<number>(0);
   const [myLongitude, setMyLongitude] = useState<number>(0);
+  const [restaurants, setRestaurants] = useState<IRestaurant[]>([]);
 
   const watchLocation = () => {
     const success = (position: GeolocationPosition) => {
@@ -24,9 +28,24 @@ const App: React.FC = () => {
   }, [])
 
   return (
-    <div className="App">
-      <Restaurants myLatitude={myLatitude} myLongitude={myLongitude} />
-      <p>Your position: Lat:{myLatitude}, Long:{myLongitude}</p>
+    <div className='App'>
+      <div className='App__main-container'>
+        <Routes>
+          <Route path="/" element={(
+            <>
+              <Home myLatitude={myLatitude} myLongitude={myLongitude} restaurants={restaurants} setRestaurants={setRestaurants} />
+              <p>Your position: Lat:{myLatitude}, Long:{myLongitude}</p>
+            </>
+          )}/>
+          <Route path="/restaurant/:id" element={(
+            <>
+              <Restaurant myLatitude={myLatitude} myLongitude={myLongitude} restaurants={restaurants} />
+              <p>Your position: Lat:{myLatitude}, Long:{myLongitude}</p>
+            </>
+          )}/>
+
+        </Routes>
+      </div>
     </div>
   );
 }

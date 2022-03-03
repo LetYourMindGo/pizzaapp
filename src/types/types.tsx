@@ -8,7 +8,7 @@ export interface IRestaurant{
   distance: number
 }
 
-export interface IMenu{
+export interface IMenuItem{
   id: number,
   category: string,
   name: string,

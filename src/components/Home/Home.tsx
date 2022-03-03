@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import { IRestaurant } from '../../types/types';
-import Restaurant from '../Restaurant/Restaurant';
+import RestaurantCard from '../RestaurantCard/RestaurantCard';
 
 interface Props {
-  myLatitude: number,
-  myLongitude: number
+  myLatitude: number;
+  myLongitude: number;
+  restaurants: IRestaurant[];
+  setRestaurants(restaurants: IRestaurant[]): void;
 }
 
-const Restaurants: React.FC<Props>= ({myLatitude, myLongitude}) => {
-  const [restaurants, setRestaurants] = useState<IRestaurant[]>([]);
-
+const Home: React.FC<Props>= ({myLatitude, myLongitude, restaurants, setRestaurants}) => {
   const getDistance = (myLat:number, myLon:number, restLat:number, restLon:number) => {
     var R = 6371;
     var dLat = deg2rad(restLat-myLat);
@@ -51,10 +51,10 @@ const Restaurants: React.FC<Props>= ({myLatitude, myLongitude}) => {
       {restaurants.sort((a:IRestaurant, b:IRestaurant) => { 
         return a.distance - b.distance;
         }).map(restaurant => (
-          <Restaurant key={restaurant.id} restaurant={restaurant} />)
+          <RestaurantCard key={restaurant.id} restaurant={restaurant} />)
       )}
     </div>
   )
 };
 
-export default Restaurants;
+export default Home;

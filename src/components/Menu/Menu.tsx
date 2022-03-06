@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import { ICartItem, IMenuItem } from '../../types/types';
 
 interface Props {
@@ -11,7 +11,7 @@ const Menu: React.FC<Props> = ({menu, cart, setCart}) => {
   const [menuItemQuantuty, setMenuItemQuantity] = useState<number>(0);
 
   const getQuantity = (e: React.FormEvent<HTMLInputElement>) => setMenuItemQuantity(parseInt(e.currentTarget.value, 10));
-
+  
   const addToCart = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     
@@ -21,11 +21,9 @@ const Menu: React.FC<Props> = ({menu, cart, setCart}) => {
     };
 
     setCart([...cart, cartItem]);
-    window.localStorage.setItem('cart', JSON.stringify(cart));
     setMenuItemQuantity(0);
     e.currentTarget.reset();
   }
-
 
   return (
     <div>{menu.map(menuItem => {

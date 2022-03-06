@@ -11,6 +11,7 @@ interface Props {
 }
 
 const Home: React.FC<Props>= ({myLatitude, myLongitude, restaurants, setRestaurants}) => {
+
   const getDistance = (myLat:number, myLon:number, restLat:number, restLon:number) => {
     var R = 6371;
     var dLat = deg2rad(restLat-myLat);
@@ -36,6 +37,7 @@ const Home: React.FC<Props>= ({myLatitude, myLongitude, restaurants, setRestaura
       restaurantList.data[i]["distance"] = getDistance(myLatitude, myLongitude,restaurantList.data[i]["latitude"],restaurantList.data[i]["longitude"]);
     }
     setRestaurants(restaurantList.data)
+    window.localStorage.setItem('restaurants', JSON.stringify(restaurantList.data));
   }
 
   useEffect(() => {
@@ -51,7 +53,7 @@ const Home: React.FC<Props>= ({myLatitude, myLongitude, restaurants, setRestaura
       {restaurants.sort((a:IRestaurant, b:IRestaurant) => { 
         return a.distance - b.distance;
         }).map(restaurant => (
-          <RestaurantCard key={restaurant.id} restaurant={restaurant} />)
+          <RestaurantCard key={restaurant.id} restaurant={restaurant}/>)
       )}
     </div>
   )

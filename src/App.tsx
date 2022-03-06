@@ -39,7 +39,7 @@ const App: React.FC = () => {
           )}/>
           <Route path="/restaurant/:id" element={(
             <>
-              <Restaurant myLatitude={myLatitude} myLongitude={myLongitude} restaurants={restaurants} />
+              <Restaurant />
               <p>Your position: Lat:{myLatitude}, Long:{myLongitude}</p>
             </>
           )}/>

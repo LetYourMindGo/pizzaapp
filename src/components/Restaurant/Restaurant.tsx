@@ -4,16 +4,21 @@ import axios from 'axios';
 import { ICartItem, IMenuItem, IOrder, IOrderInfo, IRestaurant } from '../../types/types';
 import Menu from '../Menu/Menu';
 
-interface Props {
-  myLatitude: number;
-  myLongitude: number;
-  restaurants: IRestaurant[];
-}
-
-const Restaurant:React.FC<Props> = ({myLatitude, myLongitude, restaurants}) => {
+const Restaurant:React.FC = () => {
   const [menu, setMenu] = useState<IMenuItem[]>([]);
   const [cart, setCart] = useState<ICartItem[]>([]);
   const [myOrders, setMyOrders] = useState<IOrderInfo[]>([]);
+
+  useEffect(() => {
+    setCart(JSON.parse(localStorage.getItem('cart') || ""));
+    getMenu();
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
+
+  let restFromStore: IRestaurant[] = JSON.parse(localStorage.getItem('restaurants') || "")
   
   const idFromParams: string | undefined = useParams().id?.substring(1)
   let id!: number;
@@ -26,33 +31,31 @@ const Restaurant:React.FC<Props> = ({myLatitude, myLongitude, restaurants}) => {
     setMenu(menuData.data);
   };
 
+  useEffect(() => {
+    window.localStorage.setItem('myOrders', JSON.stringify(myOrders));
+  }, [myOrders]);
+
   const placeOrder = async (e: React.SyntheticEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     const order: IOrder = {
-      cart: JSON.parse(localStorage.getItem('cart') || ""),
+      cart: cart,
       restaurantId: id
     };
 
     const response = await axios.post('https://private-anon-44d7ca3ab4-pizzaapp.apiary-mock.com/orders/', order);
     
     setMyOrders([...myOrders, response.data]);
-    window.localStorage.setItem('myOrders', JSON.stringify(myOrders));
     console.log(JSON.parse(localStorage.getItem('myOrders') || ""));
     
     setCart([]);
-    
-
-  }
-
-  useEffect(() => {
-    getMenu();
-  }, []);
+    window.localStorage.removeItem('cart')
+  };
 
   return (
     <div>
-      <h3>{restaurants.find(x => x.id === id)?.name}</h3>
-      <p>{restaurants.find(x => x.id === id)?.distance}</p>
+      <h3>{restFromStore.find(x => x.id === id)?.name}</h3>
+      <p>{restFromStore.find(x => x.id === id)?.distance}</p>
       <Menu key={id} menu={menu} cart={cart} setCart={setCart} />
       <button type='submit' onClick={placeOrder}>Place order</button>
     </div>

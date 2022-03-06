@@ -21,3 +21,16 @@ export interface ICartItem{
   menuItemID: number,
   quantity: number
 }
+
+export interface IOrder{
+  cart: ICartItem[] | null,
+  restaurantId: number
+}
+
+export interface IOrderInfo{
+  orderId: number,
+  totalPrice: number,
+  orderedAt: string,
+  esitmatedDelivery: string,
+  status: string
+}

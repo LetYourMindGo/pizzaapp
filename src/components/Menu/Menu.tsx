@@ -12,7 +12,7 @@ const Menu: React.FC<Props> = ({menu, cart, setCart}) => {
 
   const getQuantity = (e: React.FormEvent<HTMLInputElement>) => setMenuItemQuantity(parseInt(e.currentTarget.value, 10));
 
-  const onSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
+  const addToCart = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     
     const cartItem: ICartItem = {
@@ -21,6 +21,7 @@ const Menu: React.FC<Props> = ({menu, cart, setCart}) => {
     };
 
     setCart([...cart, cartItem]);
+    window.localStorage.setItem('cart', JSON.stringify(cart));
     setMenuItemQuantity(0);
     e.currentTarget.reset();
   }
@@ -29,7 +30,7 @@ const Menu: React.FC<Props> = ({menu, cart, setCart}) => {
   return (
     <div>{menu.map(menuItem => {
       return (
-        <form key={menuItem.id} id={menuItem.id.toString()} onSubmit={onSubmit}>
+        <form key={menuItem.id} id={menuItem.id.toString()} onSubmit={addToCart}>
           <p>{menuItem.id}</p>
           <p>{menuItem.name}</p>
           <p>{menuItem.price}kr</p>

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { ICartItem, IMenuItem, IOrder, IOrderInfo, IRestaurant } from '../../types/types';
 import Menu from '../Menu/Menu';
@@ -9,14 +9,21 @@ const Restaurant:React.FC = () => {
   const [cart, setCart] = useState<ICartItem[]>([]);
   const [myOrders, setMyOrders] = useState<IOrderInfo[]>([]);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     setCart(JSON.parse(localStorage.getItem('cart') || ""));
+    setMyOrders(JSON.parse(localStorage.getItem('myOrders') || ""));
     getMenu();
   }, []);
 
   useEffect(() => {
     window.localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
+
+  useEffect(() => {
+    window.localStorage.setItem('myOrders', JSON.stringify(myOrders));
+  }, [myOrders]);
 
   let restFromStore: IRestaurant[] = JSON.parse(localStorage.getItem('restaurants') || "")
   
@@ -31,10 +38,6 @@ const Restaurant:React.FC = () => {
     setMenu(menuData.data);
   };
 
-  useEffect(() => {
-    window.localStorage.setItem('myOrders', JSON.stringify(myOrders));
-  }, [myOrders]);
-
   const placeOrder = async (e: React.SyntheticEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
@@ -46,10 +49,8 @@ const Restaurant:React.FC = () => {
     const response = await axios.post('https://private-anon-44d7ca3ab4-pizzaapp.apiary-mock.com/orders/', order);
     
     setMyOrders([...myOrders, response.data]);
-    console.log(JSON.parse(localStorage.getItem('myOrders') || ""));
-    
     setCart([]);
-    window.localStorage.removeItem('cart')
+    navigate('/orders')
   };
 
   return (

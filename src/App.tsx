@@ -1,9 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { IRestaurant } from './types/types';
 import Home from './components/Home/Home'
 import Restaurant from './components/Restaurant/Restaurant';
+import Orders from './components/Orders/Orders';
+import Footer from './components/Footer/Footer';
+import Header from './components/Header/Header';
 import './App.css';
-import { IRestaurant } from './types/types';
 
 const App: React.FC = () => {
   const [myLatitude, setMyLatitude] = useState<number>(0);
@@ -28,19 +31,28 @@ const App: React.FC = () => {
   }, [])
 
   return (
-    <div className='App'>
-      <div className='App__main-container'>
+    <div className='pizza-app'>
+      <div className='pizza-app__main-container'>
         <Routes>
           <Route path="/" element={(
             <>
+              <Header />
               <Home myLatitude={myLatitude} myLongitude={myLongitude} restaurants={restaurants} setRestaurants={setRestaurants} />
-              <p>Your position: Lat:{myLatitude}, Long:{myLongitude}</p>
+              <Footer />
             </>
           )}/>
           <Route path="/restaurant/:id" element={(
             <>
+              <Header />
               <Restaurant />
-              <p>Your position: Lat:{myLatitude}, Long:{myLongitude}</p>
+              <Footer />
+            </>
+          )}/>
+          <Route path="/orders" element={(
+            <>
+              <Header />
+              <Orders />
+              <Footer />
             </>
           )}/>
 

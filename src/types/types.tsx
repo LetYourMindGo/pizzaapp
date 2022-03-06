@@ -23,7 +23,7 @@ export interface ICartItem{
 }
 
 export interface IOrder{
-  cart: ICartItem[] | null,
+  cart: ICartItem[],
   restaurantId: number
 }
 

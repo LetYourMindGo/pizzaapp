@@ -4,10 +4,17 @@ import axios from 'axios';
 import { ICartItem, IMenuItem, IOrder, IOrderInfo, IRestaurant } from '../../types/types';
 import Menu from '../Menu/Menu';
 
-const Restaurant:React.FC = () => {
-  const [menu, setMenu] = useState<IMenuItem[]>([]);
-  const [cart, setCart] = useState<ICartItem[]>([]);
-  const [myOrders, setMyOrders] = useState<IOrderInfo[]>([]);
+interface Props {
+  menu: IMenuItem[],
+  cart: ICartItem[],
+  myOrders: IOrderInfo[],
+  setMenu(menu: IMenuItem[]): void,
+  setCart(cart: ICartItem[]): void,
+  setMyOrders(myOrders: IOrderInfo[]): void
+}
+
+const Restaurant:React.FC<Props> = ({menu, setMenu, cart, setCart, myOrders, setMyOrders}) => {
+  
 
   const navigate = useNavigate();
 

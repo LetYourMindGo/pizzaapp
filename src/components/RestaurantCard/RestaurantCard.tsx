@@ -14,8 +14,8 @@ const RestaurantCard: React.FC<Props> = ({restaurant}) => {
   }
 
   return (
-    <div>
-      <h2 onClick={onClick}>{restaurant.name}</h2>
+    <div onClick={onClick}>
+      <h2>{restaurant.name}</h2>
       <p>{restaurant.address1}</p>
       <p>{Math.round((restaurant.distance + Number.EPSILON) * 100) / 100}km</p>
     </div>

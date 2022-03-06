@@ -16,3 +16,8 @@ export interface IMenuItem{
   topping?: string[],
   rank?: number
 }
+
+export interface ICartItem{
+  menuItemID: number,
+  quantity: number
+}

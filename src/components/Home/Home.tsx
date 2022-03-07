@@ -1,16 +1,26 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import axios from 'axios';
-import { IRestaurant } from '../../types/types';
+import {IOrderInfo, IRestaurant } from '../../types/types';
 import RestaurantCard from '../RestaurantCard/RestaurantCard';
 
 interface Props {
   myLatitude: number;
   myLongitude: number;
   restaurants: IRestaurant[];
+  myOrders: IOrderInfo[],
   setRestaurants(restaurants: IRestaurant[]): void;
+  setMyOrders(myOrders: IOrderInfo[]): void
 }
 
-const Home: React.FC<Props>= ({myLatitude, myLongitude, restaurants, setRestaurants}) => {
+const Home: React.FC<Props>= ({myLatitude, myLongitude, restaurants, setRestaurants, myOrders, setMyOrders}) => {
+
+  useEffect(() => {
+    window.localStorage.setItem('myOrders', JSON.stringify(myOrders));
+  }, [myOrders]);
+
+  useEffect(() => {
+    setMyOrders(JSON.parse(localStorage.getItem('myOrders') || ""));
+  }, []);
 
   const getDistance = (myLat:number, myLon:number, restLat:number, restLon:number) => {
     var R = 6371;

@@ -32,7 +32,7 @@ const Menu: React.FC<Props> = ({menu, cart, setCart}) => {
           <p>{menuItem.id}</p>
           <p>{menuItem.name}</p>
           <p>{menuItem.price}kr</p>
-          <input type='number' onChange={getQuantity}></input>
+          <input type='number' min='0' max='20' step='1' onChange={getQuantity}></input>
           <button type='submit'>Add to cart</button>
         </form>
       )

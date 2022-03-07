@@ -7,6 +7,7 @@ import OrdersList from './components/OrdersList/OrdersList';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Order from './components/Order/Order';
+import Navbar from './components/Navbar/Navbar';
 import './App.css';
 
 const App: React.FC = () => {
@@ -40,13 +41,15 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={(
             <>
+              <Navbar />
               <Header />
-              <Home myLatitude={myLatitude} myLongitude={myLongitude} restaurants={restaurants} setRestaurants={setRestaurants} />
+              <Home myLatitude={myLatitude} myLongitude={myLongitude} restaurants={restaurants} setRestaurants={setRestaurants} myOrders={myOrders} setMyOrders={setMyOrders} />
               <Footer />
             </>
           )}/>
           <Route path="/restaurant/:id" element={(
             <>
+              <Navbar />
               <Header />
               <Restaurant menu={menu} setMenu={setMenu} cart={cart} setCart={setCart} myOrders={myOrders} setMyOrders={setMyOrders} />
               <Footer />
@@ -54,15 +57,17 @@ const App: React.FC = () => {
           )}/>
           <Route path="/orders" element={(
             <>
+              <Navbar />
               <Header />
-              <OrdersList />
+              <OrdersList  myOrders={myOrders} />
               <Footer />
             </>
           )}/>
            <Route path="/orders/:id" element={(
             <>
+              <Navbar />
               <Header />
-              <Order menu={menu} />
+              <Order menu={menu} myOrders={myOrders} />
               <Footer />
             </>
           )}/>

@@ -5,9 +5,10 @@ import { IMenuItem, IOrderInfo } from '../../types/types';
 
 interface Props {
   menu: IMenuItem[]
+  myOrders: IOrderInfo[]
 }
 
-const Order: React.FC<Props> = ({menu}) => {
+const Order: React.FC<Props> = ({menu, myOrders}) => {
   const [order, setOrder] = useState<IOrderInfo>()
 
   const idFromParams: string | undefined = useParams().id?.substring(1)

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { ICartItem, IMenuItem, IOrder, IOrderInfo, IRestaurant } from '../../types/types';
@@ -15,14 +15,7 @@ interface Props {
 
 const Restaurant:React.FC<Props> = ({menu, setMenu, cart, setCart, myOrders, setMyOrders}) => {
   
-
   const navigate = useNavigate();
-
-  useEffect(() => {
-    setCart(JSON.parse(localStorage.getItem('cart') || ""));
-    setMyOrders(JSON.parse(localStorage.getItem('myOrders') || ""));
-    getMenu();
-  }, []);
 
   useEffect(() => {
     window.localStorage.setItem('cart', JSON.stringify(cart));
@@ -31,6 +24,12 @@ const Restaurant:React.FC<Props> = ({menu, setMenu, cart, setCart, myOrders, set
   useEffect(() => {
     window.localStorage.setItem('myOrders', JSON.stringify(myOrders));
   }, [myOrders]);
+  
+  useEffect(() => {
+    getMenu();
+    setCart(JSON.parse(localStorage.getItem('cart') || ""));
+    setMyOrders(JSON.parse(localStorage.getItem('myOrders') || ""));
+  }, []);
 
   let restFromStore: IRestaurant[] = JSON.parse(localStorage.getItem('restaurants') || "")
   
@@ -42,6 +41,7 @@ const Restaurant:React.FC<Props> = ({menu, setMenu, cart, setCart, myOrders, set
 
   const getMenu = async () => {
     const menuData = await axios.get(`https://private-anon-44d7ca3ab4-pizzaapp.apiary-mock.com/restaurants/${id}/menu`);
+    
     setMenu(menuData.data);
   };
 

@@ -2,6 +2,8 @@
 
 Application built for a recruitment process.
 
+[Check deployed app](https://pizzaapp-vert.vercel.app/)
+
 ## Technology used:
 
 **Frontend:**

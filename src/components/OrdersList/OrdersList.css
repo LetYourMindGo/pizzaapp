@@ -1,0 +1,29 @@
+.orders-page{
+  padding-top: 6rem;
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.your-orders{
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.hidden{
+  display: none;
+}
+
+.no-orders{
+  font-size: 2rem;
+  padding: 38vh 2rem;
+  text-align: center;
+}
+
+.orders-page__container{
+  display: flex;
+  flex-direction: column;
+  width: 90%
+}

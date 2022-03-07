@@ -1,0 +1,37 @@
+.navbar{
+  height: 8vh;
+  max-width: 480px;
+  width: 100%;
+  position: fixed;
+  display: flex;
+  bottom: 0;
+  border-top: 2px solid;
+  background-color: #CE2B37;
+  color: white;
+  z-index: 5;
+}
+
+.navbar__area{
+  height: 100%;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.navbar__area:last-child{
+  border-left: 2px solid;
+}
+
+.navbar__button{
+  font-size: 1.75rem;
+  border: none;
+  background-color: transparent;
+  color: white
+}
+
+.active{
+  text-decoration: underline;
+  font-weight: bold;
+}

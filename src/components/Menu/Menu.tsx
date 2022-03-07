@@ -1,5 +1,6 @@
 import React, { useState} from 'react';
 import { ICartItem, IMenuItem } from '../../types/types';
+import './Menu.css';
 
 interface Props {
   menu: IMenuItem[];
@@ -26,14 +27,17 @@ const Menu: React.FC<Props> = ({menu, cart, setCart}) => {
   }
 
   return (
-    <div>{menu.map(menuItem => {
+    <div className='menu-container'>{menu.map(menuItem => {
       return (
-        <form key={menuItem.id} id={menuItem.id.toString()} onSubmit={addToCart}>
-          <p>{menuItem.id}</p>
-          <p>{menuItem.name}</p>
-          <p>{menuItem.price}kr</p>
-          <input type='number' min='0' max='20' step='1' onChange={getQuantity}></input>
-          <button type='submit'>Add to cart</button>
+        <form className='menu-container__item' key={menuItem.id} id={menuItem.id.toString()} onSubmit={addToCart}>
+          <div className='item__info'>
+            <p>{menuItem.name}</p>
+            <p>{menuItem.price}kr</p>
+          </div>
+          <div className='item__order'>
+            <input className='order__input' type='number' min='0' max='20' step='1' onChange={getQuantity}></input>
+            <button className='order__cart-btn' type='submit'>Add to cart</button>
+          </div>
         </form>
       )
       })}

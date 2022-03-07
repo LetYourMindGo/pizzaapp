@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import axios from 'axios';
 import {IOrderInfo, IRestaurant } from '../../types/types';
 import RestaurantCard from '../RestaurantCard/RestaurantCard';
+import './Home.css';
 
 interface Props {
   myLatitude: number;
@@ -59,12 +60,15 @@ const Home: React.FC<Props>= ({myLatitude, myLongitude, restaurants, setRestaura
   });
 
   return (
-    <div>
-      {restaurants.sort((a:IRestaurant, b:IRestaurant) => { 
-        return a.distance - b.distance;
-        }).map(restaurant => (
-          <RestaurantCard key={restaurant.id} restaurant={restaurant}/>)
-      )}
+    <div className='home-page'>
+      <h2 className='home-page__heading'>Available Restaurants:</h2>
+      <div className='home-page__restaurants'>
+        {restaurants.sort((a:IRestaurant, b:IRestaurant) => { 
+          return a.distance - b.distance;
+          }).map(restaurant => (
+            <RestaurantCard key={restaurant.id} restaurant={restaurant}/>)
+        )}
+      </div>
     </div>
   )
 };

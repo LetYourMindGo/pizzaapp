@@ -1,0 +1,13 @@
+.page-header {
+  position:fixed;
+  width: 100%;
+  max-width: 480px;
+  height: 8vh;
+  border-bottom: 2px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #009246;
+  color: white;
+  z-index: 5;
+}

@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { ICartItem, IMenuItem, IOrder, IOrderInfo, IRestaurant } from '../../types/types';
 import Menu from '../Menu/Menu';
+import './Restaurant.css';
 
 interface Props {
   menu: IMenuItem[],
@@ -61,11 +62,11 @@ const Restaurant:React.FC<Props> = ({menu, setMenu, cart, setCart, myOrders, set
   };
 
   return (
-    <div>
-      <h3>{restFromStore.find(x => x.id === id)?.name}</h3>
-      <p>{restFromStore.find(x => x.id === id)?.distance}</p>
+    <div className='restaurant-page'>
+      <h3 className='restaurant-page__name'>{restFromStore.find(x => x.id === id)?.name}</h3>
+      <p className='restaurant-page__address'>{restFromStore.find(x => x.id === id)?.address1}, {restFromStore.find(x => x.id === id)?.address2}</p>
       <Menu key={id} menu={menu} cart={cart} setCart={setCart} />
-      <button type='submit' onClick={placeOrder}>Place order</button>
+      <button className='restaurant-page__order-btn' type='submit' onClick={placeOrder}>Place order</button>
     </div>
   )
 }

@@ -1,0 +1,30 @@
+.restaurant-page{
+  padding-top: 6rem;
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.restaurant-page__name{
+  font-size: 2rem;
+}
+
+.restaurant-page__address{
+  margin-bottom: 2rem;
+}
+
+.restaurant-page__order-btn{
+  font-size: 1.75rem;
+  padding: 1rem;
+  margin: 2rem;
+  border-radius: 5px;
+  background: linear-gradient(to right, #009246 0%, #009246 33%, #fff 33%, #fff 67%, #CE2B37 67%, #CE2B37 100%);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.restaurant-page__order-btn:hover, .restaurant-page__order-btn:active{
+  transform: scale(90%);
+  transition: .1s;
+}

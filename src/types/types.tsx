@@ -32,5 +32,7 @@ export interface IOrderInfo{
   totalPrice: number,
   orderedAt: string,
   esitmatedDelivery: string,
-  status: string
+  status: string,
+  cart: ICartItem[],
+  restaurantId: number
 }

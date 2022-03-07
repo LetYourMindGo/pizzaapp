@@ -1,9 +1,9 @@
 .page-footer {
   width: 100%;
   height: 2rem;
-  padding: 0.5rem 0;
+  padding: 0.5rem 0 6rem;
   position: absolute;
-  z-index: 1;
+  z-index: 0;
   bottom: 0;
 }
 

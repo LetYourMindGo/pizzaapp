@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { IMenuItem, IOrderInfo } from '../../types/types';
+import './Order.css';
 
 interface Props {
   menu: IMenuItem[]
@@ -28,12 +29,15 @@ const Order: React.FC<Props> = ({menu, myOrders}) => {
 
   
   return (
-    <div>
-      <p>Order ID: {order?.orderId}</p>
-      <p>Total Price: {order?.totalPrice}</p>
-      <p>Ordered At: {order?.orderedAt}</p>
-      <p>Estimated Delivery: {order?.esitmatedDelivery}</p>
-      <p>Status: {order?.status}</p>
+    <div className='order-page'>
+      <h2 className='order-page__heading'>Your Order:</h2>
+      <div className='order-page__info'>
+        <p className='info__text'>Order ID: {order?.orderId}</p>
+        <p className='info__text'>Total Price: {order?.totalPrice}</p>
+        <p className='info__text'>Ordered At: {order?.orderedAt}</p>
+        <p className='info__text'>Estimated Delivery: {order?.esitmatedDelivery}</p>
+        <p className='info__text'>Status: {order?.status}</p>
+      </div>
     </div>
   )
 }

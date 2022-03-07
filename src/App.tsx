@@ -36,42 +36,27 @@ const App: React.FC = () => {
   }, [])
 
   return (
-    <div className='pizza-app'>
-      <div className='pizza-app__main-container'>
-        <Routes>
-          <Route path="/" element={(
-            <>
-              <Navbar />
-              <Header />
+    <div className='pizza-app__main-container'>
+      <div className='main-container__wrapper'>
+        <Navbar />
+        <Header />
+        <div className='page-content'>
+          <Routes>
+            <Route path="/" element={(
               <Home myLatitude={myLatitude} myLongitude={myLongitude} restaurants={restaurants} setRestaurants={setRestaurants} myOrders={myOrders} setMyOrders={setMyOrders} />
-              <Footer />
-            </>
-          )}/>
-          <Route path="/restaurant/:id" element={(
-            <>
-              <Navbar />
-              <Header />
+            )}/>
+            <Route path="/restaurant/:id" element={(
               <Restaurant menu={menu} setMenu={setMenu} cart={cart} setCart={setCart} myOrders={myOrders} setMyOrders={setMyOrders} />
-              <Footer />
-            </>
-          )}/>
-          <Route path="/orders" element={(
-            <>
-              <Navbar />
-              <Header />
-              <OrdersList  myOrders={myOrders} />
-              <Footer />
-            </>
-          )}/>
-           <Route path="/orders/:id" element={(
-            <>
-              <Navbar />
-              <Header />
+            )}/>
+            <Route path="/orders" element={(
+              <OrdersList />
+            )}/>
+            <Route path="/orders/:id" element={(
               <Order menu={menu} myOrders={myOrders} />
-              <Footer />
-            </>
-          )}/>
-        </Routes>
+            )}/>
+          </Routes>
+        </div>
+        <Footer />
       </div>
     </div>
   );

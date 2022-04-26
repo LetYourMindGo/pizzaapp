@@ -9,6 +9,7 @@ import Header from './components/Header/Header';
 import Order from './components/Order/Order';
 import Navbar from './components/Navbar/Navbar';
 import './App.css';
+import Cart from './components/Cart/Cart';
 
 const App: React.FC = () => {
   const [myLatitude, setMyLatitude] = useState<number>(0);
@@ -40,6 +41,7 @@ const App: React.FC = () => {
       <div className='main-container__wrapper'>
         <Navbar />
         <Header />
+        <Cart cart={cart} setCart={setCart}/>
         <div className='page-content'>
           <Routes>
             <Route path="/" element={(

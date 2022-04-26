@@ -23,5 +23,5 @@ Application built for a recruitment process.
 
 1. Display ingredients of products in menu.
 2. Filter products in menu by category.
-3. Show actual shoping cart.
+3. Show actual shopping cart.
 4. Display list of products in placed order.

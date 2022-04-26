@@ -19,6 +19,8 @@ export interface IMenuItem{
 
 export interface ICartItem{
   menuItemID: number,
+  name: string,
+  price: number,
   quantity: number
 }
 

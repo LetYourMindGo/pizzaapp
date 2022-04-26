@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { ICartItem, IMenuItem } from '../../types/types';
 import './Menu.css';
 
@@ -18,6 +18,8 @@ const Menu: React.FC<Props> = ({menu, cart, setCart}) => {
     
     const cartItem: ICartItem = {
       menuItemID: parseInt(e.currentTarget.id, 10),
+      name: e.currentTarget.name,
+      price: parseInt(e.currentTarget.price, 10),
       quantity: menuItemQuantuty
     };
 
